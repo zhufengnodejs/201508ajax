@@ -9,10 +9,11 @@ var serve = function(request,response){
     console.log(request.method);//获取请求中的方法
     console.log(request.url);//获取请求中的URL
     console.log(request.headers);//请求头(首部)
-
+    response.setHeader('Content-Type','text/html');
     response.statusCode = 200;//状态码
-    response.write('hello');//写响应体
-    response.write('world');//写响应体
+    response.write('<h1>hello</h1>');//写响应体
+    response.write('<h1>world</h1>');//写响应体
+
     response.end();//结束响应
 
 }
