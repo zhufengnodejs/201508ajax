@@ -15,13 +15,21 @@ var serve = function (request, response) {
     if (pathname == '/') {
         response.setHeader('Content-Type', 'text/html;charset=utf8');
         fs.readFile('./form.html', function (err, data) {
-            response.write(data);
+            if(err){
+                console.error(err);
+            }else{
+                response.write(data);
+            }
             response.end();
         });
     } else if (pathname.indexOf('/public') == 0) {
         response.setHeader('Content-Type', mime.lookup(url));
         fs.readFile('.' + pathname, function (err, data) {
-            response.write(data);
+            if(err){
+                console.error(err);
+            }else{
+                response.write(data);
+            }
             response.end();
         });
     } else if(pathname.indexOf('/post') == 0 && request.method.toLocaleLowerCase() =='get'){
