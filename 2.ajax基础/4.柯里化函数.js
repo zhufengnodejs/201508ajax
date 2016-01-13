@@ -18,6 +18,13 @@ function log(name,words){
 log('zfpx','hello');
 log('zfpx','world');
 
-var zfLog = ?;
+var zfLog = function(){
+    log('zfpx',arguments[0])
+}
+var zfLog = log.bind(null,'zfpx');
+
+var zflog = function(){
+    log.apply(null,['zfpx'].concat(Array.prototype.slice.call(arguments)));
+}
 zfLog('hello');
 zfLog('world');
