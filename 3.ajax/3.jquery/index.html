@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <script src="//cdn.bootcss.com/jquery/2.1.1/jquery.js"></script>
+</head>
+<body>
+<div id="content"></div>
+</body>
+<script>
+    window.onload = function(){
+        $.ajax({
+            method:'get',//请求方法
+            url:'/ajax',//请求路径
+            data:{name:'zfpx'},//发送的数据
+            dataType:'json',//响应的类型
+            cache:false,//是否可以缓存
+            async:true, //是否异步
+            username:undefined,//用户名
+            password:undefined, //密码
+            timeout:0,//设置超时时间 如果在指定毫秒内请求没有发出则放弃请求
+            context:document.getElementById('content'),//上下文对象 设置在回调函数中的this指针
+            headers:{name:'customerHeader'} //请求头
+        }).done(function(data){
+            console.log(data);
+            this.innerHTML = 'hello';
+            this.innerHTML = data.color;
+        }).fail(function(reason){
+            console.error(reason);
+        }).always(function(){
+            console.error('always');
+        });
+    }
+</script>
+</html>

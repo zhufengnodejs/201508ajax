@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+</head>
+<body>
+
+</body>
+<script src="/public/xhr.js"></script>
+<script>
+    var xhr = XHR();
+    // 方法  Url 是否异步
+    xhr.open('post','/ajax',true);
+    //xhr.overrideMimeType('application/json');
+    xhr.responseType = 'document';
+    xhr.onreadystatechange = function(){
+        if(xhr.readyState == 4){
+            console.log(xhr.getAllResponseHeaders());
+            console.log(xhr.getResponseHeader('Date'));
+            console.log(xhr.status,xhr.statusText);
+            console.log(xhr.response);
+        }
+    }
+    xhr.setRequestHeader('Content-Type','application/x-www-form-urlencoded');
+    xhr.send('name=zfpx&age=6');
+
+</script>
+</html>

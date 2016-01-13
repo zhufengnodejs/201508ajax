@@ -1,10 +1,10 @@
 var util = {
     toJSON:(function(){
-       /* if(JSON){
+        if(JSON){
             return function(str){
                 return JSON.parse(str);
             }
-        }*/
+        }
         return function(str){
             //return eval('('+str+')');
             return new Function('return '+str)();
