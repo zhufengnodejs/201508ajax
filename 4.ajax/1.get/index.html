@@ -5,17 +5,39 @@
     <title></title>
 </head>
 <body>
-<table>
+<table id="tab">
     <tbody>
         <tr>
-            <td>书名</td>
+            <td>书名</td><td>价格</td>
         </tr>
 
     </tbody>
 </table>
 </body>
 <script>
-  //访问books.json
-   //然后 把得到的数据加载到table里
+    var oTab = document.getElementById("tab");
+    var tBody = oTab.tBodies[0];
+    var xhr= new XMLHttpRequest();
+    xhr.open("get","books.json",true);
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var aryData=xhr.responseText;
+            aryData=eval("("+aryData+")");
+            bindData(tBody,aryData);
+        }
+    }
+    function bindData(element,aryData){
+        for(var i=0;i<aryData.length;i++){
+            var oTr = document.createElement("tr");
+            var cur=aryData[i];
+            for (var key in cur) {
+                var oTd = document.createElement("td");
+                oTd.innerHTML = cur[key];
+                oTr.appendChild(oTd);
+            }
+            element.appendChild(oTr);
+        }
+    }
+    xhr.send();
 </script>
 </html>

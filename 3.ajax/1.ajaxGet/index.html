@@ -5,19 +5,41 @@
     <title></title>
 </head>
 <body>
+<table id="tab">
+    <tbody>
+    <tr>
+        <td>书名</td>
+    </tr>
 
+    </tbody>
+</table>
 </body>
 <script src="xhr.js"></script>
 <script>
-    var xhr = new XMLHttpRequest();
-
-    // 方法  Url 是否异步
-    xhr.open('get','student.json',true);
-    xhr.onreadystatechange = function(){
-        alert(xhr.readyState);
-        if(xhr.readyState == 4){
-            var responseText = xhr.responseText;
-            console.log(responseText);
+    var oTab = document.getElementById("tab");
+    var tBody = oTab.tBodies[0];
+    var oRows = tBody.rows;
+    var xhr= new XMLHttpRequest();
+    xhr.open("get","books.json",true);
+    xhr.onreadystatechange=function(){
+        if(xhr.readyState==4 && xhr.status==200){
+            var aryData=xhr.responseText;
+            aryData=eval("("+aryData+")");
+            function bindData(){
+                for(var i=0;i<aryData.length;i++){
+                    var oTr = document.createElement("tr");
+                    var cur=aryData[i];
+                    console.log(cur);
+                    for (var key in cur) {
+                        console.log(key+cur[key])
+                        var oTd = document.createElement("td");
+                        oTd.innerHTML = cur[key];
+                        oTr.appendChild(oTd);
+                    }
+                    tBody.appendChild(oTr);
+                }
+            }
+            bindData();
         }
     }
     xhr.send();
