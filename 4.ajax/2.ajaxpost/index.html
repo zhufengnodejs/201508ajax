@@ -6,9 +6,9 @@
 </head>
 <body>
 <form >
-    姓名:<input type="text" name="username"/>
-    年龄:<input type="text" name="age"/>
-    <input type="button" onclick="submit()" value="增加"/>
+    姓名:<input type="text" id="username" name="username"/>
+    年龄:<input type="text" id="age" name="age"/>
+    <input type="button" onclick="sub()" value="增加"/>
 </form>
 <table id="tab">
     <tbody>
@@ -19,8 +19,18 @@
     </tbody>
 </table>
 <script>
-    function submit(){
-
+    function sub(){
+       var str = '';
+       str += ('username='+document.querySelector('#username').value);
+       str += ('&age='+document.querySelector('#age').value);
+       var xhr = new XMLHttpRequest();
+       xhr.open('get','http://localhost:8080/ajax?'+str,true);
+       xhr.onreadystatechange = function(){
+            if(xhr.readyState  == 4 && xhr.status == 200){
+                alert(xhr.responseText);
+            }
+       }
+       xhr.send();
     }
 </script>
 </body>
