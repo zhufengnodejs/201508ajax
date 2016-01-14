@@ -9,13 +9,15 @@
 </body>
 <script src="xhr.js"></script>
 <script>
-    var xhr = XHR();
+    var xhr = new XMLHttpRequest();
 
     // 方法  Url 是否异步
     xhr.open('get','student.json',true);
     xhr.onreadystatechange = function(){
+        alert(xhr.readyState);
         if(xhr.readyState == 4){
-            console.log(xhr.status,xhr.statusText,xhr.responseText);
+            var responseText = xhr.responseText;
+            console.log(responseText);
         }
     }
     xhr.send();
