@@ -23,6 +23,9 @@ http.createServer(function(req,res){
         })
     }else if(pathname == '/ajax'){
         students.push(urlObj.query);
+        //允许那个客户端发过来的请求
+        // 访问 控制 允许 来源
+        res.setHeader('Access-Control-Allow-Origin','http://localhost:63342');
         res.end(JSON.stringify(students));
 
     }else{
