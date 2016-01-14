@@ -24,12 +24,14 @@
        str += ('username='+document.querySelector('#username').value);
        str += ('&age='+document.querySelector('#age').value);
        var xhr = new XMLHttpRequest();
+        //post请求不需要把数据拼接到url
        xhr.open('post','http://localhost:8080/ajax',true);
        xhr.onreadystatechange = function(){
             if(xhr.readyState  == 4 && xhr.status == 200){
                 alert(xhr.responseText);
             }
        }
+        // post 请求要把发送的数据放在 send参数里
        xhr.send(str);
     }
 </script>
