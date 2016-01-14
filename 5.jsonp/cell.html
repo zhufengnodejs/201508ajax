@@ -6,33 +6,30 @@
 
 </head>
 <body>
-<input type="text" id="keyword" onkeyup="change()"/>
+<input type="text" id="keyword" /><input type="button" onclick="change()" value="查询"/>
 <ul id="content">
 
 </ul>
 </body>
 <script>
     function abc(data){
+        console.log(data);
         //得到所有的关键字数组
-        var words = data.s;
         var ul = document.getElementById('content');
         ul.innerHTML= "";
         var frag = document.createDocumentFragment();
-        ul.onclick = function(event){
-            window.open('http://www.baidu.com/s?wd='+event.target.innerHTML);
-        }
-        words.forEach(function(word){
+        for(var attr in data){
             var li = document.createElement('li');
-            li.innerHTML = word;
+            li.innerHTML = attr+":"+data[attr];
             frag.appendChild(li);
-        });
+        }
         ul.appendChild(frag);
     }
     function change(){
         //输入的关键字
         var keyword = document.getElementById('keyword').value;
         //拼出来百度URL
-        var url = 'http://suggestion.baidu.com/su?wd='+keyword+'&cb=abc';
+        var url = 'https://tcc.taobao.com/cc/json/mobile_tel_segment.htm?tel='+keyword+'&callback=abc';
         //创建一个脚本元素
         var script = document.createElement('script');
         //指定URL
