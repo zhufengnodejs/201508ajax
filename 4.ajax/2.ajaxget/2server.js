@@ -23,11 +23,14 @@ http.createServer(function(req,res){
         })
     }else if(pathname == '/ajax'){
         students.push(urlObj.query);
-        res.end(JSON.stringify(students));
+        res.write('hello');
+        setTimeout(function(){
+            res.end(JSON.stringify(students));
+        },2000);
 
     }else{
         res.end('404');
     }
 //在指定端口上进行监听
-}).listen(8080);
+}).listen(9090);
 

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+
+</head>
+<body>
+<input type="text" id="keyword" onkeypress="change()"/>
+<ul id="content">
+
+</ul>
+</body>
+<script>
+    function abc(data){
+        var words = data.s;
+        var ul = document.getElementById('content');
+        ul.innerHTML= "";
+        var frag = document.createDocumentFragment();
+        ul.onclick = function(event){
+            window.open('http://www.baidu.com/s?wd='+event.target.innerHTML);
+        }
+        words.forEach(function(word){
+            var li = document.createElement('li');
+            li.innerHTML = word;
+            frag.appendChild(li);
+        });
+        ul.appendChild(frag);
+    }
+    function change(){
+        var keyword = document.getElementById('keyword').value;
+        var url = 'http://suggestion.baidu.com/su?wd='+keyword+'&cb=abc';
+        var script = document.createElement('script');
+        script.src = url;
+        document.body.appendChild(script);
+    }
+</script>
+</html>
