@@ -20,20 +20,29 @@
 </table>
 <script>
     function sub(){
+       //查询字符串
        var str = '';
        str += ('username='+document.querySelector('#username').value);
        str += ('&age='+document.querySelector('#age').value);
+       //创建ajax对象
        var xhr = new XMLHttpRequest();
+       console.log('1 xhr readyState',xhr.readyState);
         //get请求需要把数据拼接到url
        xhr.open('get','http://localhost:8080/ajax?'+str,true);
+        console.log('2 xhr readyState',xhr.readyState);
+        //注册状态变化的时的回调函数
        xhr.onreadystatechange = function(){
+           console.log('3 xhr readyState',xhr.readyState);
            //判断xhr的转态是否成功，以及服务器端的响应码是否为200
             if(xhr.readyState  == 4 && xhr.status == 200){
                 alert(xhr.responseText);
             }
        }
+
         // get 请求没有请求体，所以参数为空
        xhr.send();
+
+
     }
 </script>
 </body>
